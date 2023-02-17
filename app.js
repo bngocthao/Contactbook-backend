@@ -22,13 +22,14 @@ app.use((req, res, next) => {
     return next(new ApiError(404, "Resource not found"));
 });
 
+
 //define error hadling middleware last, after other app.use()and routes call
 app.use((err, req, res, next) => {
     //middleware xử lý lỗi tập trung
     // trong cách đoạn code xử lý ở các route, gọi next(error)
     // sẽ chuyển về middleware xử lý lỗi này
-    return res.status(error.statusCode || 500).json({
-        message: error.message || "Internal Servcer Error",
+    return res.status(err.statusCode || 500).json({
+        message: err.message || "Internal Servcer Error",
     });
 });
 
